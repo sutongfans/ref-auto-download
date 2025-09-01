@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  mcp:
+    build:
+      context: ./mcp
+      dockerfile: Dockerfile
+    container_name: huggingface_mcp
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./mcp:/app
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=INFO
+    networks:
+      - huggingface-network
+
+networks:
+  huggingface-network:
+    driver: bridge
